@@ -41,9 +41,17 @@ export default function Home() {
   };
 
   let nbOfEarthquakes = allEarthquakes.length;
+  let yourPlace = `${
+    nbOfEarthquakes > 0 && suggestedLocations[0]
+      ? suggestedLocations[0].properties.name +
+        ", " +
+        suggestedLocations[0].properties.country
+      : "your place"
+  }`;
+
   let sentence = `Between 2000 and 2022, ${nbOfEarthquakes} earthquake${
     nbOfEarthquakes > 0 ? "s" : ""
-  } occured within a radius of 300 km around your place.`;
+  } occured within a radius of 200 km around ${yourPlace}.`;
 
   const getDate = (iso) => {
     let date = new Date(iso);
@@ -71,6 +79,7 @@ export default function Home() {
               onChange={(e) => {
                 changeLocation(e.target.value);
               }}
+              list="locations"
             ></input>
             {location ? (
               <button className={styles.clearButton} onClick={clearInput}>
@@ -81,16 +90,17 @@ export default function Home() {
             )}
           </div>
 
-          {/*  <datalist id="locations">
-          {suggestedLocations &&
-            suggestedLocations.map((loc) => {
-              return (
-                <option key={loc.properties.osm_id}>
-                  {loc.name}, {loc.country}
-                </option>
-              );
-            })}
-        </datalist> */}
+          <datalist id="locations">
+            {suggestedLocations &&
+              suggestedLocations.map((loc) => {
+                return (
+                  <option
+                    key={loc.properties.osm_id}
+                    value={loc.properties.name + ", " + loc.properties.country}
+                  />
+                );
+              })}
+          </datalist>
 
           <button
             className={styles.inputButton}
@@ -108,29 +118,21 @@ export default function Home() {
         {allEarthquakes.length ? (
           <div className={styles.listContainer}>
             <p className={styles.listText}>Here are the 10 strongest ones:</p>
-            {allEarthquakes
-              .sort((a, b) => {
-                let magA = a.properties.mag;
-                let magB = b.properties.mag;
-
-                return magB - magA;
-              })
-              .splice(0, 10)
-              .map((event) => {
-                return (
-                  <div key={event.id} className={styles.listItem}>
-                    <h2 className={styles.titleListItem}>
-                      • {event.properties.place}
-                    </h2>
-                    <p className={styles.pListItem}>
-                      Magnitude: {event.properties.mag} / 8
-                    </p>
-                    <p className={styles.pListItem}>
-                      When? {getDate(event.properties.time)}
-                    </p>
-                  </div>
-                );
-              })}
+            {allEarthquakes.splice(0, 10).map((event) => {
+              return (
+                <div key={event.id} className={styles.listItem}>
+                  <h2 className={styles.titleListItem}>
+                    • {event.properties.place}
+                  </h2>
+                  <p className={styles.pListItem}>
+                    Magnitude: {event.properties.mag} / 8
+                  </p>
+                  <p className={styles.pListItem}>
+                    When? {getDate(event.properties.time)}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         ) : (
           ""

@@ -11,7 +11,7 @@ In order to get that, this app uses datas from Photon (Open Source API) to get t
 
 The search is limited to:
 
-- a 300 km radius around the given place to display a relevant amount of results even in low seismic zones.
+- a 200 km radius around the given place to display a relevant amount of results even in low seismic zones.
 - earthquakes with a minimum magnitude of 3. Under 1 and 3, only seismograph can feel it.
 - earthquakes that occured between 2000 and 2022 to provide the user with the latest datas.
 

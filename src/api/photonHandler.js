@@ -21,7 +21,7 @@ const photonHandler = {
       .get("https://photon.komoot.io/api/", {
         params: {
           q: location,
-          limit: "10",
+          limit: "3",
         },
       })
       .then()

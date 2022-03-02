@@ -14,7 +14,7 @@ function errorHandler(error) {
   throw error;
 }
 
-const apiHandler = {
+const usgsHandler = {
   service,
 
   getAllEarthquakes() {
@@ -33,12 +33,12 @@ const apiHandler = {
           format: "geojson",
           latitude: lat,
           longitude: long,
-          maxradiuskm: "300",
+          maxradiuskm: "200",
           endtime: "2022-01-01",
           starttime: "2000-01-01",
           minmagnitude: "3",
           eventtype: "earthquake",
-          //limit: "20",
+          orderby: "magnitude",
         },
       })
       .then()
@@ -46,4 +46,4 @@ const apiHandler = {
   },
 };
 
-export default apiHandler;
+export default usgsHandler;
