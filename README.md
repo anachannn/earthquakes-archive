@@ -1,1 +1,3 @@
-hello, this is a test
+# earthquakes-archive
+
+Earthquakes search engine based on USGS database
