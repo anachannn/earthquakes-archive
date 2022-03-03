@@ -8,8 +8,9 @@ export default function Home() {
   const [allEarthquakes, setAllEarthquakes] = useState([]);
   const [location, setLocation] = useState("");
   const [suggestedLocations, setSuggestedLocations] = useState([]);
+  const [status, setStatus] = useState("");
 
-  const changeLocation = (loc) => {
+  const updateLocation = (loc) => {
     photonHandler
       .getSuggestedLocations(loc)
       .then((data) => {
@@ -22,6 +23,7 @@ export default function Home() {
 
   const displayEarthquakes = (event) => {
     event.preventDefault();
+    setStatus("Loading..");
 
     let lat = suggestedLocations[0].geometry.coordinates[1];
     let long = suggestedLocations[0].geometry.coordinates[0];
@@ -29,15 +31,29 @@ export default function Home() {
     usgsHandler
       .getListOfEarthquakes(lat, long)
       .then((data) => {
-        setAllEarthquakes(data.data.features);
+        setAllEarthquakes(data);
+        if (data.length === 0) {
+          setStatus("No earthquake found.");
+        }
       })
       .catch((error) => console.log(error));
   };
 
+  // To format the ISO date
+  const getDate = (iso) => {
+    let date = new Date(iso);
+    let formatedDate =
+      date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+
+    return formatedDate;
+  };
+
+  // To clear the input before searching for a new place
   const clearInput = (event) => {
     event.preventDefault();
     setLocation("");
     setAllEarthquakes([]);
+    setStatus("");
   };
 
   let nbOfEarthquakes = allEarthquakes.length;
@@ -53,14 +69,6 @@ export default function Home() {
     nbOfEarthquakes > 0 ? "s" : ""
   } occured within a radius of 200 km around ${yourPlace}.`;
 
-  const getDate = (iso) => {
-    let date = new Date(iso);
-    let formatedDate =
-      date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
-
-    return formatedDate;
-  };
-
   return (
     <div className={styles.home}>
       <h1 className={styles.title}>Earthquakes Archive</h1>
@@ -69,15 +77,14 @@ export default function Home() {
         <form className={styles.inputContainer}>
           <label className={styles.inputLabel}>Where do you live?</label>
 
-          <div className={styles.inputs}>
+          <div>
             <input
-              id="city"
               className={styles.inputField}
               type="text"
               value={location}
               placeholder={"Berlin, Germany"}
               onChange={(e) => {
-                changeLocation(e.target.value);
+                updateLocation(e.target.value);
               }}
               list="locations"
             ></input>
@@ -111,11 +118,9 @@ export default function Home() {
           </button>
         </form>
 
-        <div className={styles.sentenceContainer}>
-          <p>{sentence}</p>
-        </div>
+        <div className={styles.sentenceContainer}>{sentence}</div>
 
-        {allEarthquakes.length ? (
+        {allEarthquakes.length && status === "Loading.." ? (
           <div className={styles.listContainer}>
             <p className={styles.listText}>Here are the 10 strongest ones:</p>
             {allEarthquakes.splice(0, 10).map((event) => {
@@ -135,7 +140,7 @@ export default function Home() {
             })}
           </div>
         ) : (
-          ""
+          <p className={styles.errorMessage}>{status}</p>
         )}
       </div>
     </div>

@@ -1,4 +1,4 @@
-# earthquakes-archive   
+# earthquakes-archive
 
 Welcome to <b>earthquakes-archives</b>, a search engine to learn more about the seismic history of your place!
 
@@ -16,7 +16,7 @@ When the search is done:
 
 Based on USGS (US Government earthquakes database), this project is a search engine that goes through the archives of USGS and return a list of earthquakes that occured around a given city, anywhere in the world.
 
-In order to get that, this app uses datas from Photon (Open Source API) to get the choosen city' coordinates and datas from USGS to list the earthquakes history of the place. More here:
+In order to get that, this app uses datas from Photon (Open Source API) to get the choosen city's coordinates and datas from USGS to list the earthquakes history of the place. More here:
 
 - Photon: https://photon.komoot.io/
 - USGS: https://earthquake.usgs.gov/
@@ -31,7 +31,4 @@ In order to get that, this app uses datas from Photon (Open Source API) to get t
 
 This project uses <b>Javascript, HTML, CSS</b> and <b>React framework</b>.
 
-Thanks for reading & have a good time using it! 
-
-
-
+Thanks for reading & have a good time using it!

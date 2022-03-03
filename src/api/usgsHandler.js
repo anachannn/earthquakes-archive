@@ -17,15 +17,6 @@ function errorHandler(error) {
 const usgsHandler = {
   service,
 
-  getAllEarthquakes() {
-    return service
-      .get(
-        "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
-      )
-      .then()
-      .catch(errorHandler);
-  },
-
   getListOfEarthquakes(lat, long) {
     return service
       .get(`https://earthquake.usgs.gov/fdsnws/event/1/query`, {
@@ -41,7 +32,7 @@ const usgsHandler = {
           orderby: "magnitude",
         },
       })
-      .then()
+      .then((data) => data.data.features)
       .catch(errorHandler);
   },
 };

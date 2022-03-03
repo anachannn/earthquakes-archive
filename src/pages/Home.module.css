@@ -30,9 +30,9 @@ body {
 }
 
 .inputContainer {
-  margin: 20px;
   display: flex;
   flex-direction: column;
+  margin: 20px;
   text-align: left;
 }
 
@@ -42,15 +42,13 @@ body {
 }
 
 .inputField {
+  margin: 30px 30px 15px 0;
+  padding: 20px;
+  width: 500px;
   border: 0.5px solid grey;
   border-radius: 5px;
   box-shadow: 3px 4px #e3e3e3;
-  padding: 20px;
-  margin: 30px;
-  margin-left: 0;
-  margin-bottom: 15px;
   font-family: monospace;
-  width: 500px;
 }
 
 @media (max-width: 757px) {
@@ -64,20 +62,16 @@ body {
 }
 
 .inputButton {
+  padding: 15px;
+  margin: 15px 30px 30px 0;
+  width: 200px;
   border: none;
   background-color: black;
   color: white;
   font-size: larger;
-  width: 200px;
-
   font-family: monospace;
   border-radius: 5px;
   box-shadow: 3px 4px #e3e3e3;
-
-  padding: 15px;
-  margin: 30px;
-  margin-left: 0;
-  margin-top: 15px;
 }
 
 .inputButton:hover {
@@ -101,13 +95,13 @@ body {
 
 .sentenceContainer {
   font-size: x-large;
-  margin: 0 10px 0 10px;
+  margin: 0 10px;
 }
 
 .listText {
   font-weight: bold;
   font-size: large;
-  margin: 0 10px 0 10px;
+  margin: 0 10px;
 }
 
 .listContainer {
@@ -116,9 +110,8 @@ body {
 }
 
 .listItem {
-  margin: 10px 30px 10px 30px;
-  padding: 25px;
-  padding-left: 50px;
+  margin: 10px 30px;
+  padding: 25px 25px 25px 50px;
   text-align: left;
   border-radius: 5px;
   border: 1px solid lightgray;
@@ -131,4 +124,8 @@ body {
 
 .pListItem {
   font-size: large;
+}
+
+.errorMessage {
+  margin: 30px 20px 20px 20px;
 }
